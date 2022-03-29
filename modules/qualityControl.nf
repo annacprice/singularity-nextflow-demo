@@ -17,10 +17,10 @@ process qualityControl_trimgalore {
     memory '4 GB'
 
     input:
-    tuple dataset_id, path(forward), path(reverse)
+    tuple val(dataset_id), path(forward), path(reverse)
 
     output:
-    tuple dataset_id, path("*_val_1.fq.gz"), path("*_val_2.fq.gz"), emit: trimgalore_out optional true
+    tuple val(dataset_id), path("*_val_1.fq.gz"), path("*_val_2.fq.gz"), emit: trimgalore_out optional true
     tuple path("*trimming_report.txt"), path("*_fastqc.{zip,html}"), emit: trimgalore_results optional true
 
     script:

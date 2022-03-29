@@ -17,10 +17,10 @@ process bacterialAssembly_shovill {
     memory '8 GB'
 
     input:
-    tuple dataset_id, path(forward), path(reverse)
+    tuple val(dataset_id), path(forward), path(reverse)
 
     output:
-    tuple dataset_id, path("${dataset_id}.fasta"), emit: shovill_out optional true
+    tuple val(dataset_id), path("${dataset_id}.fasta"), emit: shovill_out optional true
    
     script:
     """
