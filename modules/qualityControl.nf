@@ -3,18 +3,19 @@ process qualityControl_trimgalore {
     * Trims paired fastq using trim_galore (https://github.com/FelixKrueger/TrimGalore)
     * @input tuple dataset_id, project, path(forward), path(reverse)
     * @output trimgalore_out tuple dataset_id, project, path("*_val_1.fq.gz"), path("*_val_2.fq.gz")
-    * @operator none
     */
 
     tag { dataset_id }
+
+    container = "quay.io/annacprice/trimgalore:latest"
 
     publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}/trimmed_reads", pattern: "*_val_{1,2}.fq.gz", mode: 'copy'
     publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}/fastqc", pattern: '*_fastqc.{zip,html}', mode: 'copy'
     publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}/trim_galore" , pattern: '*_trimming_report.txt', mode: 'copy'
 
-    cpus 2
+    cpus 4
 
-    memory '4 GB'
+    memory '8 GB'
 
     input:
     tuple val(dataset_id), path(forward), path(reverse)
