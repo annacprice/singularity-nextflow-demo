@@ -25,7 +25,7 @@ process bacterialAssembly_shovill {
    
     script:
     """
-    shovill --cpus ${task.cpus} --R1 ${forward} --R2 ${reverse} --kmers 50 --outdir shovill
+    shovill --cpus ${task.cpus} --R1 ${forward} --R2 ${reverse} --kmers 31 --outdir shovill
     mv shovill/contigs.fa ${dataset_id}.fasta
     """
 }
